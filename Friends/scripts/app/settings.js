@@ -5,7 +5,7 @@
 var appSettings = {
 
     everlive: {
-        apiKey: '$EVERLIVE_API_KEY$', // Put your Backend Services API key here
+        apiKey: 'V2J4Y0sW4ra08jFd', // Put your Backend Services API key here
         scheme: 'http'
     },
 
