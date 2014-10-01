@@ -32,23 +32,37 @@ app.AddActivity = (function () {
         };
         
         var saveActivity = function () {
+            var jsonObject={incidente:'{"IdIncidente":1,"IdProyecto":'+$proyectos.val()+',"Descripcion":"'+$descripcion.val()+'","FechaCreacion":"2014-09-18T00:00:00","FechaIncidente":"'+$fecha.val()+'T00:00:00","FechaSolucion":"0001-01-01T00:00:00","Estado":0,"Responsable":"David","DetalleSolucion":null,"Usuario":"'+window.localStorage.getItem("login_usuario")+'"}'};
+           // app.showAlert(jsonObject.incidente,"");
             
-            // Validating of the required fields
-            if (validator.validate()) {
-                
-                // Adding new activity to Activities model
-                var activities = app.Activities.activities;
-                var activity = activities.add();
-                
-                activity.Text = $newStatus.val();
-                activity.UserId = app.Users.currentUser.get('data').Id;
-                
-                activities.one('sync', function () {
-                    app.mobileApp.navigate('#:back');
-                });
-                
-                activities.sync();
-            }
+            $.ajax({
+              type: 'POST',
+              url: "http://localhost:49524/Service1.asmx/AgregarIncidente",
+              data: jsonObject,
+              success: function(data){
+                    var str=data.getElementsByTagName("boolean")[0].childNodes[0].nodeValue;
+                  if(str=='true'){
+                      app.showAlert("Se agregó el incidente con éxito","Exito");
+                      app.Activities.reload();
+                  }
+                  else{
+                      app.showError("No se pudo agregar el incidente");
+                  }
+                  
+                  
+                },
+
+              async:false
+           });
+            
+           app.mobileApp.navigate('views/activitiesView.html');
+            
+            
+            
+            
+            
+            
+
         };
         
         var onSelectChange = function (sel) {
@@ -72,7 +86,7 @@ app.AddActivity = (function () {
               async:false
            });
            var protectosStr=window.localStorage.getItem("proyectos");
-           app.showAlert(protectosStr,'');
+           //app.showAlert(protectosStr,'');
            if(protectosStr!==''){
                  pro=JSON.parse(protectosStr);
                  var pros =pro.proyectos;

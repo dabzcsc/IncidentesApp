@@ -12,71 +12,104 @@ app.Activities = (function () {
 
         var activityModel = {
 
-            id: 'Id',
+            id: 'IdIncidente',
             fields: {
-                Text: {
-                    field: 'Text',
+                IdProyecto: {
+                    field: 'IdProyecto',
                     defaultValue: ''
                 },
-                CreatedAt: {
-                    field: 'CreatedAt',
+                Descripcion: {
+                    field: 'Descripcion',
+                    defaultValue: ''
+                },
+                FechaCreacion: {
+                    fields: 'FechaCreacion',
                     defaultValue: new Date()
                 },
-                Picture: {
-                    fields: 'Picture',
+                FechaIncidente: {
+                    field: 'FechaIncidente',
                     defaultValue: null
                 },
-                UserId: {
-                    field: 'UserId',
+                FechaSolucion: {
+                    field: 'FechaSolucion',
                     defaultValue: null
                 },
-                Likes: {
-                    field: 'Likes',
-                    defaultValue: []
+                 Estado: {
+                    field: 'Estado',
+                    defaultValue: 0
+                },
+                 Responsable: {
+                    field: 'Responsable',
+                    defaultValue: ''
+                },
+                 DetalleSolucion: {
+                    field: 'DetalleSolucion',
+                    defaultValue: ''
+                },
+                 Usuario: {
+                    field: 'Usuario',
+                    defaultValue: ''
+                },
+                 NombreProyecto: {
+                    field: 'NombreProyecto',
+                    defaultValue: ''
                 }
             },
             CreatedAtFormatted: function () {
 
-                return app.helper.formatDate(this.get('CreatedAt'));
-            },
-            PictureUrl: function () {
-
-                return app.helper.resolvePictureUrl(this.get('Picture'));
-            },
-            User: function () {
-
-                var userId = this.get('UserId');
-
-                var user = $.grep(app.Users.users(), function (e) {
-                    return e.Id === userId;
-                })[0];
-
-                return user ? {
-                    DisplayName: user.DisplayName,
-                    PictureUrl: app.helper.resolveProfilePictureUrl(user.Picture)
-                } : {
-                    DisplayName: 'Anonymous',
-                    PictureUrl: app.helper.resolveProfilePictureUrl()
-                };
+                return app.helper.formatDate(this.get('FechaIncidente'));
             },
             isVisible: function () {
-                var currentUserId = app.Users.currentUser.data.Id;
-                var userId = this.get('UserId');
+              
 
-                return currentUserId === userId;
+                return true;
             }
         };
 
+        var darIncidentes=function(){
+            var jsonObject={usuario:window.localStorage.getItem("login_usuario")};
+            var inc={incidentes:[]};
+            window.localStorage.setItem("incidentes",'');
+            $.ajax({
+              type: 'POST',
+              url: "http://localhost:49524/Service1.asmx/DarIncidentesPorUsuario",
+              data: jsonObject,
+              success: function(data){
+                    var str=data.getElementsByTagName("string")[0].childNodes[0].nodeValue;
+                   // app.showAlert(str,"");
+                  window.localStorage.setItem("incidentes",str);
+                  
+                },
+
+              async:false
+           });
+           var incidentesStr=window.localStorage.getItem("incidentes");
+           if(incidentesStr!==''){
+                      inc=JSON.parse(incidentesStr);
+                      //app.showAlert(window.localStorage.getItem("login_usuario")+"TODO BN","");
+                  }
+                  else{
+                      app.showError("Algo paso");
+                  }
+            app.showAlert("pidio","")
+            return inc;
+        }
+        
+        
         // Activities data source. The Backend Services dialect of the Kendo UI DataSource component
         // supports filtering, sorting, paging, and CRUD operations.
         var activitiesDataSource = new kendo.data.DataSource({
-            type: 'everlive',
-            schema: {
-                model: activityModel
-            },
             transport: {
-                // Required by Backend Services
-                typeName: 'Activities'
+                read: function(options){
+
+                    var inc =darIncidentes();
+                    
+                    options.success(inc); 
+                }
+            },
+            schema: {
+                data: "incidentes",
+                model: activityModel
             },
             change: function (e) {
 
@@ -85,12 +118,17 @@ app.Activities = (function () {
                 } else {
                     $('#no-activities-span').show();
                 }
-            },
-            sort: { field: 'CreatedAt', dir: 'desc' }
-        });
+            
+            }
+            });
+        
+        var reloadDataSource=function(){
+            activitiesDataSource.read();
+        }
 
         return {
-            activities: activitiesDataSource
+            activities: activitiesDataSource,
+            reloadDataSource: reloadDataSource
         };
 
     }());
@@ -112,7 +150,7 @@ app.Activities = (function () {
 
         // Logout user
         var logout = function () {
-
+            
             app.helper.logout()
             .then(navigateHome, function (err) {
                 app.showError(err.message);
@@ -123,7 +161,8 @@ app.Activities = (function () {
         return {
             activities: activitiesModel.activities,
             activitySelected: activitySelected,
-            logout: logout
+            logout: logout,
+            reload:activitiesModel.reloadDataSource
         };
 
     }());
