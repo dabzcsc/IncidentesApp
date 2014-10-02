@@ -59,6 +59,42 @@ app.Activities = (function () {
 
                 return app.helper.formatDate(this.get('FechaIncidente'));
             },
+            FechaSolucionFormatted: function () {
+                 if(this.get('Estado')==0){
+                    return "Sin solución";
+                }
+                else{
+                    return app.helper.formatDate(this.get('FechaSolucion'));
+                }
+            },
+            FechaCreacionnFormatted: function () {
+
+                return app.helper.formatDate(this.get('FechaCreacion'));
+            },
+            EstadoFormatted: function () {
+                if(this.get('Estado')==0){
+                    return "Sin solución";
+                }
+                else{
+                    return "Solucionado!";
+                }
+            },
+            ResponsableFormatted: function () {
+                if(this.get('Responsable')!=null){
+                    return this.get('Responsable');
+                }
+                else{
+                    return "Sin responsable aun.";
+                }
+            },
+            DetalleFormatted: function () {
+                if(this.get('Estado')==0){
+                    return "Sin solución";
+                }
+                else{
+                    return this.get('DetalleSolucion');
+                }
+            },
             isVisible: function () {
               
 

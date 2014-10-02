@@ -9,14 +9,29 @@
 
     <div id="status-container" class="user-status-wrp cf" data-role="listview" data-style="inset">
         <div class="activity-content">
-            <h2 id="personName" class="person-name" data-bind='text: NombreProyecto'></h2>
-            <span id="activityDate" class="time-span" data-bind="text: CreatedAtFormatted"></span>
-            <span id="activityText" data-bind="text: Descripcion" class="user-share-txt"></span>
+            <h2 id="lblProyecto" class="person-name">Proyecto</h2>
+            <span id="txtProyecto" data-bind="text: NombreProyecto" class="user-share-txt"></span>
+            <h2 id="lblFIncidente" class="person-name">Fecha de Incidente</h2>
+            <span id="txtFIncidente" data-bind="text: CreatedAtFormatted" class="user-share-txt"></span>
+            <h2 id="lblDescripcion" class="person-name">Descripción</h2>
+            <span id="txtDescripcion" data-bind="text: Descripcion" class="user-share-txt"></span>
+            <h2 id="lblEstado" class="person-name">Estado</h2>
+            <span id="txtEstado" data-bind="text: EstadoFormatted" class="user-share-txt"></span>
+            <h2 id="lblResponsable" class="person-name">Responsable</h2>
+            <span id="txtResponsable" data-bind="text: ResponsableFormatted" class="user-share-txt"></span>
+            <h2 id="lblFSolucion" class="person-name">Fecha Solución</h2>
+            <span id="txtFSolucion" data-bind="text: FechaSolucionFormatted" class="user-share-txt"></span>
+            <h2 id="lblDetalleSolucion" class="person-name">Detalle solución</h2>
+            <span id="txtDetalle" data-bind="text: DetalleFormatted" class="user-share-txt"></span>
+            
+            
+            <span id="activityDate" class="time-span" data-bind="text: FechaCreacionnFormatted"></span>
+
         </div>
     </div>
     
     <div data-role="footer">
-        <a data-role="button" data-bind="visible: isVisible" data-click="app.Activity.remove" class="btn btn-delete">Delete</a>
+        <a data-role="button" data-bind="visible: isVisible" data-click="app.Activity.remove" class="btn btn-delete">Eliminar</a>
     </div>
 </div>
 

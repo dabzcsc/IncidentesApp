@@ -450,7 +450,7 @@
 #friendsApp .add-comment-view .person-name,
 #friendsApp .activity-content .person-name {
     display: block;
-    margin: 0 0 .5em;
+    margin: 0 0 0em;
     color: #3598db;
     font-size: 1.1rem;
 }
