@@ -91,7 +91,7 @@ app.Activities = (function () {
                   else{
                       app.showError("Algo paso");
                   }
-            app.showAlert("pidio","")
+            //app.showAlert("pidio","")
             return inc;
         }
         
@@ -138,7 +138,7 @@ app.Activities = (function () {
 
         // Navigate to activityView When some activity is selected
         var activitySelected = function (e) {
-
+            //app.showAlert(e.data.IdIncidente,"")
             app.mobileApp.navigate('views/activityView.html?uid=' + e.data.uid);
         };
 
@@ -150,12 +150,8 @@ app.Activities = (function () {
 
         // Logout user
         var logout = function () {
-            
-            app.helper.logout()
-            .then(navigateHome, function (err) {
-                app.showError(err.message);
-                navigateHome();
-            });
+            window.localStorage.clear();
+            navigateHome();
         };
 
         return {

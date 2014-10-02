@@ -435,7 +435,7 @@
 
 #friendsApp .activity-content {
     position: relative;
-    padding-left: 5em;
+    padding-left: 0em;
     font-size: .85rem;
 }
 

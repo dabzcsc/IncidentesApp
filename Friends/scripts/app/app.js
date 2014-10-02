@@ -127,7 +127,8 @@ var app = (function (win) {
 
         // Current user logout
         logout: function () {
-            return el.Users.logout();
+            window.localStorage.clear();
+            return true;
         }
     };
 

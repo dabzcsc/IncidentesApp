@@ -31,13 +31,14 @@ app.Activity = (function () {
             activityUid = e.view.params.uid;
             // Get current activity (based on item uid) from Activities model
             activity = app.Activities.activities.getByUid(activityUid);
-            $activityPicture[0].style.display = activity.Picture ? 'block' : 'none';
+            //app.showAlert(activity.Descripcion,'');
+            //$activityPicture[0].style.display = activity.Picture ? 'block' : 'none';
             
-            app.Comments.comments.filter({
-                field: 'ActivityId',
-                operator: 'eq',
-                value: activity.Id
-            });
+            //app.Comments.comments.filter({
+              //  field: 'ActivityId',
+              //  operator: 'eq',
+              //  value: activity.Id
+            //});
             
             kendo.bind(e.view.element, activity, kendo.mobile.ui);
         };

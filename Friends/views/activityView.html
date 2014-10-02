@@ -1,24 +1,17 @@
 <div data-role="view" id="single-activity" data-layout="default" class="activity-view" data-init="app.Activity.init" data-show="app.Activity.show">
     <div data-role="header">
         <div data-role="navbar">
-            Activity
+            Incidente
             <a class="nav-button nav-button-back hide-text" data-align="left" data-role="backbutton">Back</a>
             <a class="nav-button nav-button-post" data-align="right" data-role="button" href="views/addCommentView.html">Comment</a>
         </div>
     </div>
 
     <div id="status-container" class="user-status-wrp cf" data-role="listview" data-style="inset">
-        <div class="user-avatar">
-            <img data-bind="attr:{src: User().PictureUrl}" alt="styles/images/avatar.png" />
-        </div>
         <div class="activity-content">
-            <h2 id="personName" class="person-name" data-bind='text: User().DisplayName'></h2>
+            <h2 id="personName" class="person-name" data-bind='text: NombreProyecto'></h2>
             <span id="activityDate" class="time-span" data-bind="text: CreatedAtFormatted"></span>
-            <span id="activityText" data-bind="text: Text" class="user-share-txt"></span>
-            <img id="picture" class="picture" data-bind="attr:{src: PictureUrl()}" width="100%"/>
-            <div class="comments-wrp">
-                <ul id="comments-listview"></ul>
-            </div>
+            <span id="activityText" data-bind="text: Descripcion" class="user-share-txt"></span>
         </div>
     </div>
     
