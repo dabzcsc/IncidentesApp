@@ -37,7 +37,7 @@ app.Login = (function () {
             var jsonObject={usuario:username,password:password};
             $.ajax({
               type: 'POST',
-              url: "http://localhost:49524/Service1.asmx/Login",
+              url: app.webservice+"Login",
               data: jsonObject,
               success: function(data){
                     var str=data.getElementsByTagName("string")[0].childNodes[0].nodeValue;

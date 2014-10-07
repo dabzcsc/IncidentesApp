@@ -37,7 +37,7 @@ app.AddActivity = (function () {
             
             $.ajax({
               type: 'POST',
-              url: "http://localhost:49524/Service1.asmx/AgregarIncidente",
+              url: app.webservice+"AgregarIncidente",
               data: jsonObject,
               success: function(data){
                     var str=data.getElementsByTagName("boolean")[0].childNodes[0].nodeValue;
@@ -76,7 +76,7 @@ app.AddActivity = (function () {
              window.localStorage.setItem("proyectos",'');
             $.ajax({
               type: 'POST',
-              url: "http://localhost:49524/Service1.asmx/DarProyectos",
+              url: app.webservice+"DarProyectos",
               success: function(data){
                     var str=data.getElementsByTagName("string")[0].childNodes[0].nodeValue;
                    // app.showAlert(str,"");

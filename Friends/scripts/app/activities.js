@@ -108,7 +108,7 @@ app.Activities = (function () {
             window.localStorage.setItem("incidentes",'');
             $.ajax({
               type: 'POST',
-              url: "http://localhost:49524/Service1.asmx/DarIncidentesPorUsuario",
+              url: app.webservice+"DarIncidentesPorUsuario",
               data: jsonObject,
               success: function(data){
                     var str=data.getElementsByTagName("string")[0].childNodes[0].nodeValue;

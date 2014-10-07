@@ -43,24 +43,22 @@ var app = (function (win) {
             }, 10);
         }
     };
+    
+    var webservice="http://181.48.16.186/wsIncidentes/Service1.asmx/";
 
     // Handle device back button tap
     var onBackKeyDown = function(e) {
         e.preventDefault();
 
-        navigator.notification.confirm('Do you really want to exit?', function (confirmed) {
+        navigator.notification.confirm('Realmente desea salir?', function (confirmed) {
             var exit = function () {
                 navigator.app.exitApp();
             };
 
             if (confirmed === true || confirmed === 1) {
-                // Stop EQATEC analytics monitor on app exit
-                if (analytics.isAnalytics()) {
-                    analytics.Stop();
-                }
-                AppHelper.logout().then(exit, exit);
+                exit();
             }
-        }, 'Exit', ['OK', 'Cancel']);
+        }, 'Salir', ['OK', 'Cancelar']);
     };
 
     var onDeviceReady = function() {
@@ -154,6 +152,7 @@ var app = (function (win) {
         mobileApp: mobileApp,
         helper: AppHelper,
         everlive: el,
-        getYear: getYear
+        getYear: getYear,
+        webservice: webservice
     };
 }(window));
