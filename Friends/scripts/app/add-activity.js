@@ -20,6 +20,15 @@ app.AddActivity = (function () {
             validator = $('#enterStatus').kendoValidator().data('kendoValidator');
             $newStatus = $('#newStatus');
             $fecha=$('#fechaIncidentePick');
+            $fecha.mobiscroll().date({
+                invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] },
+                theme: 'android-ics',
+                display: 'inline',
+                mode: 'scroller',
+                dateOrder: 'dd mm yy',
+                dateFormat : "yyyy-mm-dd"
+            });  
+
             $descripcion = $('#newStatus');
             $proyectos = $('#proyectoPick');
         };
@@ -32,8 +41,10 @@ app.AddActivity = (function () {
         };
         
         var saveActivity = function () {
+            
             var jsonObject={incidente:'{"IdIncidente":1,"IdProyecto":'+$proyectos.val()+',"Descripcion":"'+$descripcion.val()+'","FechaCreacion":"2014-09-18T00:00:00","FechaIncidente":"'+$fecha.val()+'T00:00:00","FechaSolucion":"0001-01-01T00:00:00","Estado":0,"Responsable":"David","DetalleSolucion":null,"Usuario":"'+window.localStorage.getItem("login_usuario")+'"}'};
-           // app.showAlert(jsonObject.incidente,"");
+            //app.showAlert(jsonObject.incidente,"");
+            
             
             $.ajax({
               type: 'POST',
