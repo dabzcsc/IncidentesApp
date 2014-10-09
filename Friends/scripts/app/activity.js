@@ -55,10 +55,10 @@ app.Activity = (function () {
                     if (confirmed === true || confirmed === 1) {
                         
                         activities.remove(activity);
-                        activities.one('sync', function () {
-                            app.mobileApp.navigate('#:back');
-                        });
-                        activities.sync();
+                        //activities.one('sync', function () {
+                          //  app.mobileApp.navigate('#:back');
+                        //});
+                        //activities.sync();
                     }
                 }
             );
