@@ -62,21 +62,7 @@ app.Login = (function () {
             
             
             
-            // Authenticate using the username and password
-            app.everlive.Users.login(username, password)
-            .then(function () {
 
-                return app.Users.load();
-            })
-            .then(function () {
-
-                //
-            })
-            .then(null,
-                  function (err) {
-                      app.showError(err.message);
-                  }
-            );
         };
 
 

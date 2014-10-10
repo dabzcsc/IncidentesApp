@@ -22,15 +22,17 @@ app.AddActivity = (function () {
             $fecha=$('#fechaIncidentePick');
             $fecha.mobiscroll().date({
                 invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] },
-                theme: 'android-ics',
-                display: 'inline',
-                mode: 'scroller',
+                theme: 'jqm',
+                //display: 'inline',
+                //mode: 'scroller',
                 dateOrder: 'dd mm yy',
-                dateFormat : "yyyy-mm-dd"
+                dateFormat : "yyyy-mm-dd",
+                lang: 'es'
             });  
 
             $descripcion = $('#newStatus');
             $proyectos = $('#proyectoPick');
+            
         };
         
         var show = function () {
