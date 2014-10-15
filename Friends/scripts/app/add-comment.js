@@ -95,7 +95,7 @@ app.AddComment = (function () {
                 jsonObject={incidente:'{"IdIncidente":'+incidente.IdIncidente+',"IdProyecto":'+$proyectos.val()+',"Descripcion":"'+$descripcion.val()+'","FechaCreacion":"'+incidente.FechaCreacion+'","FechaIncidente":"'+$fecha.val()+'T00:00:01","FechaSolucion":"'+incidente.FechaSolucion+'","Estado":'+incidente.Estado+',"Responsable":null,"DetalleSolucion":null,"Usuario":"'+window.localStorage.getItem("login_usuario")+'"}'};
 
             }
-            app.showAlert(jsonObject.incidente,"");
+            //app.showAlert(jsonObject.incidente,"");
             
             
             $.ajax({

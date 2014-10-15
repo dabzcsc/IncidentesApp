@@ -57,7 +57,8 @@ app.Activities = (function () {
             },
             CreatedAtFormatted: function () {
 
-                return app.helper.formatDate(this.get('FechaIncidente'));
+                //return app.helper.formatDate(this.get('FechaIncidente').substring(0,10));
+                return this.get('FechaIncidente').substring(0,10);
             },
             FechaSolucionFormatted: function () {
                  if(this.get('Estado')==0){
@@ -186,8 +187,17 @@ app.Activities = (function () {
 
         // Logout user
         var logout = function () {
-            window.localStorage.clear();
-            navigateHome();
+            navigator.notification.confirm('Realmente desea salir?', function (confirmed) {
+            var exit = function () {
+                navigator.app.exitApp();
+            };
+
+            if (confirmed === true || confirmed === 1) {
+                window.localStorage.clear();
+                exit();
+            }
+        }, 'Salir', ['OK', 'Cancelar']);
+            
         };
 
         return {

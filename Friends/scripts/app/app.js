@@ -120,13 +120,14 @@ var app = (function (win) {
 
         // Date formatter. Return date in d.m.yyyy format
         formatDate: function (dateString) {
-            return kendo.toString(new Date(dateString), 'MMM d, yyyy');
+            
+            return kendo.toString(new Date(dateString), 'dd MMM yyyy');
         },
 
         // Current user logout
         logout: function () {
             window.localStorage.clear();
-            return true;
+            //return true;
         }
     };
 

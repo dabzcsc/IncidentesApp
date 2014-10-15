@@ -26,29 +26,38 @@ app.Login = (function () {
         var show = function () {
             $loginUsername.val('');
             $loginPassword.val('');
+            window.localStorage.clear();
         };
 
         // Authenticate to use Backend Services as a particular user
         var login = function () {
 
+            
+            $loginUsername = $('#loginUsername');
+            $loginPassword = $('#loginPassword');
+
+            
             var username = $loginUsername.val();
             var password = $loginPassword.val();
 
             var jsonObject={usuario:username,password:password};
+            //app.showAlert($('#loginUsername').val(),"");
             $.ajax({
               type: 'POST',
               url: app.webservice+"Login",
               data: jsonObject,
               success: function(data){
                     var str=data.getElementsByTagName("string")[0].childNodes[0].nodeValue;
-                   // app.showAlert(str,"");
+                    //app.showAlert(str,"");
                   var usu=JSON.parse(str);
+                  
                   if(str!=='null'){
+                      
                       window.localStorage.clear();
                       window.localStorage.setItem("login_usuario",usu.Login);
                       window.localStorage.setItem("nombre_usuario",usu.Nombre+ " "+usu.Apellido);
                       app.mobileApp.navigate('views/activitiesView.html');
-                     // app.showAlert(window.localStorage.getItem("login_usuario"),"")
+                      //app.showAlert(window.localStorage.getItem("login_usuario"),"");
                   }
                   else{
                       app.showError("Usuario y contraseña invalida");
